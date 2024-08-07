@@ -3,40 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-// JSON data
-const companySymbols = [
-    { "name": "Apple Inc.", "symbol": "AAPL" },
-    { "name": "Microsoft Corporation", "symbol": "MSFT" },
-    { "name": "Amazon.com, Inc.", "symbol": "AMZN" },
-    { "name": "Alphabet Inc. (Google)", "symbol": "GOOGL" },
-    { "name": "Meta Platforms, Inc. (Facebook)", "symbol": "META" },
-    { "name": "Tesla, Inc.", "symbol": "TSLA" },
-    { "name": "NVIDIA Corporation", "symbol": "NVDA" },
-    { "name": "Netflix, Inc.", "symbol": "NFLX" },
-    { "name": "Advanced Micro Devices, Inc. (AMD)", "symbol": "AMD" },
-    { "name": "Intel Corporation", "symbol": "INTC" },
-    { "name": "Visa Inc.", "symbol": "V" },
-    { "name": "Johnson & Johnson", "symbol": "JNJ" },
-    { "name": "Procter & Gamble Co.", "symbol": "PG" },
-    { "name": "Walmart Inc.", "symbol": "WMT" },
-    { "name": "PayPal Holdings, Inc.", "symbol": "PYPL" },
-    { "name": "Coca-Cola Company", "symbol": "KO" },
-    { "name": "PepsiCo, Inc.", "symbol": "PEP" },
-    { "name": "McDonald's Corporation", "symbol": "MCD" },
-    { "name": "Nike, Inc.", "symbol": "NKE" },
-    { "name": "Disney (The Walt Disney Company)", "symbol": "DIS" },
-    { "name": "IBM (International Business Machines Corporation)", "symbol": "IBM" },
-    { "name": "Cisco Systems, Inc.", "symbol": "CSCO" },
-    { "name": "Oracle Corporation", "symbol": "ORCL" },
-    { "name": "Berkshire Hathaway Inc.", "symbol": "BRK.A" },
-    { "name": "Exxon Mobil Corporation", "symbol": "XOM" }
-];
-
 export default function Home() {
     const [symbol, setSymbol] = useState('');
     const [news, setNews] = useState([]);
     const [marketStatus, setMarketStatus] = useState({});
-    const [showDropdown, setShowDropdown] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -75,11 +45,6 @@ export default function Home() {
         }
     };
 
-    const handleDropdownSelect = (selectedSymbol) => {
-        setSymbol(selectedSymbol);
-        setShowDropdown(false);
-    };
-
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
             <header className="flex justify-between items-center mb-8">
@@ -97,25 +62,6 @@ export default function Home() {
                     />
                     <button type="submit" className="bg-blue-500 text-white p-3 rounded-r-lg hover:bg-blue-600 transition-colors duration-300">Search</button>
                 </form>
-                <button
-                    onClick={() => setShowDropdown(!showDropdown)}
-                    className="ml-4 bg-gray-200 text-gray-700 p-3 rounded-lg hover:bg-gray-300 transition-colors duration-300"
-                >
-                    Select Company
-                </button>
-                {showDropdown && (
-                    <div className="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-lg w-48">
-                        {companySymbols.map((company) => (
-                            <button
-                                key={company.symbol}
-                                onClick={() => handleDropdownSelect(company.symbol)}
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                {company.name} ({company.symbol})
-                            </button>
-                        ))}
-                    </div>
-                )}
             </header>
             <main>
                 <div className="mb-8">
